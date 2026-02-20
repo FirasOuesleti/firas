@@ -1,0 +1,134 @@
+@import "tailwindcss";
+
+/* ─── CSS Custom Properties ─────────────────────────────── */
+:root {
+  --bg: #0f172a;
+  --bg-light: #1e293b;
+  --cyan: #06b6d4;
+  --violet: #8b5cf6;
+  --cyan-glow: rgba(6, 182, 212, 0.25);
+  --violet-glow: rgba(139, 92, 246, 0.20);
+  --glass-bg: rgba(255, 255, 255, 0.05);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-hover: rgba(255, 255, 255, 0.10);
+  --foreground: #f1f5f9;
+  --muted: #94a3b8;
+}
+
+/* ─── Tailwind v4 Theme Extension ───────────────────────── */
+@theme inline {
+  --color-background: var(--bg);
+  --color-foreground: var(--foreground);
+  --color-midnight: #0f172a;
+  --color-midnight-50: #1e293b;
+  --color-midnight-100: #334155;
+  --color-neon-cyan: #06b6d4;
+  --color-neon-violet: #8b5cf6;
+  --color-glass-bg: var(--glass-bg);
+  --color-glass-border: var(--glass-border);
+  --color-glass-hover: var(--glass-hover);
+  --color-muted: var(--muted);
+}
+
+/* ─── Body & Background ─────────────────────────────────── */
+body {
+  background: var(--bg);
+  color: var(--foreground);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Ambient glow orbs */
+body::before,
+body::after {
+  content: '';
+  position: fixed;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+  filter: blur(120px);
+  opacity: 0.3;
+}
+
+body::before {
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, var(--cyan) 0%, transparent 70%);
+  top: -200px;
+  left: -100px;
+}
+
+body::after {
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, var(--violet) 0%, transparent 70%);
+  bottom: -150px;
+  right: -100px;
+}
+
+/* ─── Selection ──────────────────────────────────────────── */
+::selection {
+  background: rgba(6, 182, 212, 0.3);
+  color: #f1f5f9;
+}
+
+/* ─── Custom Scrollbar ───────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.25);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(148, 163, 184, 0.4);
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(148, 163, 184, 0.25) transparent;
+}
+
+/* ─── Select / Option dark fix ────────────────────────────── */
+select option {
+  background: #1e293b;
+  color: #e2e8f0;
+}
+
+/* ─── Glass Utility ────────────────────────────────── */
+@layer components {
+  .glass {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    backdrop-filter: blur(16px) saturate(180%);
+  }
+
+  .glass-hover:hover {
+    background: var(--glass-hover);
+    border-color: rgba(255, 255, 255, 0.15);
+  }
+
+  .glow-cyan {
+    box-shadow: 0 0 20px var(--cyan-glow), 0 0 60px rgba(6, 182, 212, 0.1);
+  }
+
+  .glow-violet {
+    box-shadow: 0 0 20px var(--violet-glow), 0 0 60px rgba(139, 92, 246, 0.1);
+  }
+
+  .gradient-pill {
+    background: linear-gradient(135deg, var(--cyan) 0%, var(--violet) 100%);
+    box-shadow: 0 0 16px var(--cyan-glow), 0 0 32px var(--violet-glow);
+  }
+}
